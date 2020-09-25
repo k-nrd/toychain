@@ -1,9 +1,9 @@
 {
-  "name": "@hexlet/nodejs-package",
-  "version": "0.0.3",
-  "description": "Node.js boilerplate package",
+  "name": "toychain",
+  "version": "0.0.1",
+  "description": "A PoW blockchain.",
   "bin": {
-    "hexlet": "bin/nodejs-package.js"
+    "toychain": "bin/toychain.js"
   },
   "engines": {
     "node": ">=14"
@@ -13,22 +13,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hexlet-boilerplates/nodejs-package.git"
+    "url": "https://github.com/k-onrad/toychain"
   },
-  "author": "Kirill Mokevnin",
-  "license": "ISC",
+  "author": "Gustavo Konrad",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hexlet-boilerplates/nodejs-package/issues"
+    "url": "https://github.com/k-onrad/toychain/issues"
   },
   "type": "module",
   "jest": {
     "testEnvironment": "node",
     "transform": {}
   },
-  "homepage": "https://github.com/hexlet-boilerplates/nodejs-package#readme",
+  "homepage": "https://github.com/k-onrad/toychain#readme",
   "dependencies": {
-    "debug": "^4.1.1",
-    "lodash": "^4.17.20"
+    "crypto-js": "^4.0.0"
   },
   "devDependencies": {
     "@jest/globals": "^26.4.2",
