@@ -10,13 +10,23 @@ env:
   es2020: true
 
 extends:
-  - 'airbnb-base'
+  - 'eslint:recommended'
   - 'plugin:jest/recommended'
 
 parserOptions:
-  ecmaVersion: 11
+  ecmaVersion: 20
   sourceType: module
 
 rules:
-  no-console: 0
-  import/extensions: 0 # FIXME: remove when rule will be adjusted for new nodejs version
+  no-unused-vars:
+    - error
+    - single
+  semi:
+    - error
+    - never
+  indent:
+    - error
+    - 2
+  comma-dangle:
+    - error
+    - only-multiline
