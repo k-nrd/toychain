@@ -1,0 +1,25 @@
+{
+	"extends": ["eslint:recommended", "plugin:jest/recommended"],
+  "plugins":["jest"],
+	"parserOptions": {
+		"ecmaVersion": 2020,
+		"sourceType": "module"
+	},
+	"env": {
+		"node": true,
+		"es2020": true
+	},
+	"rules": {
+		"no-unused-vars": [
+			"error", 
+			{ 
+				"argsIgnorePattern": "^_",
+				"varsIgnorePattern": "^_"
+			}
+		],
+		"quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "indent": ["error", 2],
+    "comma-dangle": ["error", "only-multiline"]
+	}
+}
