@@ -1,14 +1,19 @@
-import GENESIS from './genesis'
-import { sha256hash } from './hash'
+const { GENESIS } = require('./config')
+const sha256hash = require('./hash')
 
-export function valid(chain) {
-  if (chain[0] !== GENESIS) return false
-  for (let i = 0; i < chain.length-1; i++) {
-    if (chain[i].hash !== chain[i+1].lastHash) return false
-    if (i === 0) continue
-    const { timestamp, lastHash, data } = chain[i],
-      hash = sha256hash(timestamp, lastHash, data)
-    if (chain[i].hash !== hash) return false
+function validate (chain) {
+  if (JSON.stringify(chain[0]) !== JSON.stringify(GENESIS)) return false
+
+  for (let i = 1; i < chain.length; i++) {
+    const { timestamp, hash, lastHash, nonce, diff, data } = chain[i],
+      calcHash = sha256hash(timestamp, lastHash, data, nonce, diff)
+
+    if (lastHash !== chain[i-1].hash) return false
+    if (hash !== calcHash) return false
+    if (Math.abs(diff - chain[i-1].diff) > 1) return false
   }
+
   return true
 }
+
+module.exports = validate
