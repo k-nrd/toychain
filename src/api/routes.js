@@ -3,16 +3,11 @@ function getBlocks (req, res) {
 }
 
 function mineBlock (req, res) {
-  const { data } = req.body
-  req.blockchain.add({ data })
-  const url = '/api/blocks'
-  const msg = `Redirecting to ${url}`
-  res.writeHead(302, {
-    Location: url,
-    'Content-Type': 'text/plain',
-    'Content-Length': msg.length 
-  })
-  res.end(msg)
+  const { body: { data }, blockchain, pubsub } = req
+  blockchain.add({ data })
+  pubsub.broadcast()
+  res.writeHead(302, { Location: '/api/blocks' })
+  res.end()
 }
 
 module.exports = {

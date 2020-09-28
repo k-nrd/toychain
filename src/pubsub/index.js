@@ -20,7 +20,11 @@ function createPubSub ({ blockchain }) {
   })
 
   function publish({ channel, msg }) {
-    publisher.publish(channel, msg)
+    subscriber.unsubscribe(channel, () => {
+      publisher.publish(channel, msg, () => {
+        subscriber.subscribe(channel)
+      })
+    })
   }
 
   function broadcast() {

@@ -1,11 +1,11 @@
 const { describe, test, expect } = require('@jest/globals')
 
-const sha256hash = require('../src/blockchain/hash')
+const { sha256hash } = require('../src/crypto')
 
 describe('SHA256 hashing', () => {
   test('Hashing function generates a SHA256 hash', () => {
     expect(sha256hash('FOO'))
-      .toEqual('1001010100100000010000110111110011101000100100000010111010110011011110011010011111011000101010101010100110001111110001001100100101001110111010110000011110110110011010000100100001010100100001101000111110100110111101110010101111110011010010110000111111010011')
+      .toEqual('9520437CE8902EB379A7D8AAA98FC4C94EEB07B6684854868FA6F72BF34B0FD3'.toLowerCase())
   })
 
   test('Hash is the same regardless of argument order', () => {

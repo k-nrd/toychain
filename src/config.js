@@ -11,8 +11,14 @@ const GENESIS = Object.freeze({
   data: []
 })
 
+const ROOT_NODE_ADDR = 'localhost:3000'
+
+const STARTING_BALANCE = 1000
+
 module.exports = {
   MINE_RATE,
   INIT_DIFF,
-  GENESIS
+  GENESIS,
+  ROOT_NODE_ADDR,
+  STARTING_BALANCE
 }

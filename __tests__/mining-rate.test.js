@@ -1,7 +1,7 @@
 const { beforeEach, describe, test, expect } = require('@jest/globals')
 
 const createBlockchain = require('../src/blockchain')
-const { MINE_RATE } = require('../src/blockchain/config')
+const { MINE_RATE } = require('../src/config')
 
 describe('Mining rate', () => {
   let own,

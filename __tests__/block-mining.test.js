@@ -1,8 +1,8 @@
 const { describe, test, expect } = require('@jest/globals')
 
 const { mine, adjustDiff } = require('../src/blockchain/mine')
-const sha256hash = require('../src/blockchain/hash')
-const { GENESIS, MINE_RATE } = require('../src/blockchain/config')
+const { sha256hash, hex2bin } = require('../src/crypto')
+const { GENESIS, MINE_RATE } = require('../src/config')
 
 describe('Mine block', () => {
   const last = GENESIS,
@@ -10,12 +10,12 @@ describe('Mine block', () => {
     mined = mine({ last, data })
 
   test('Mined block has all block props', () => {
-    expect('timestamp' in mined).toBe(true)
-    expect('lastHash' in mined).toBe(true)
-    expect('hash' in mined).toBe(true)
-    expect('data' in mined).toBe(true)
-    expect('nonce' in mined).toBe(true)
-    expect('diff' in mined).toBe(true)
+    expect(mined).toHaveProperty('timestamp')
+    expect(mined).toHaveProperty('lastHash')
+    expect(mined).toHaveProperty('hash')
+    expect(mined).toHaveProperty('data')
+    expect(mined).toHaveProperty('nonce')
+    expect(mined).toHaveProperty('diff')
   })
 
   test('Mined block `lastHash` is equal to lastBlock hash', () => {
@@ -32,7 +32,7 @@ describe('Mine block', () => {
 
   test('Mined block has `hash` generated = require( inputs', () => {
     expect(mined.hash)
-      .toEqual(sha256hash(mined.timestamp, last.hash, mined.nonce, mined.diff, data))
+      .toEqual(hex2bin(sha256hash(mined.timestamp, last.hash, mined.nonce, mined.diff, data)))
   })
 
   test('Mined block has `hash` that meets diff criteria', () => {

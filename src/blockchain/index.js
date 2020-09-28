@@ -1,9 +1,18 @@
+const request = require('request')
 const { mine } = require('./mine')
 const validate = require('./validate')
-const { GENESIS } = require('./config')
+const { GENESIS, ROOT_NODE_ADDR } = require('../config')
 
 function createBlockchain() {
   let chain = [GENESIS]
+
+  const sync = () =>
+    request({ url: `http://${ROOT_NODE_ADDR}/api/blocks` }, (err, res, body) => {
+      if (err || res.statusCode !== 200)
+        throw err
+      console.log('Synchronizing chain...')
+      replace(JSON.parse(body))
+    })
 
   const get = () =>
     chain
@@ -30,6 +39,7 @@ function createBlockchain() {
     get,
     add,
     replace,
+    sync,
   })
 }
 
