@@ -1,6 +1,6 @@
 const sha256 = require('crypto-js/sha256')
 const Hex = require('crypto-js/enc-hex')
-const EdDSA = require('elliptic').eddsa
+const EC = require('elliptic').ec
 
 function hex2bin (hex) {
   const bits = []
@@ -12,15 +12,17 @@ function hex2bin (hex) {
 const sha256hash = (...args) =>
   Hex.stringify(sha256(args.sort().join(' ')))
 
-const eddsa = new EdDSA('ed25519')
+const ec = new EC('ed25519')
 
 function verifySignature({ pubKey, data, signature }) {
-  return pubKey.verify(sha256hash(data), signature)
+  return ec
+    .keyFromPublic(pubKey, 'hex')
+    .verify(sha256hash(data), signature)
 }
 
 module.exports = {
   hex2bin,
   sha256hash,
-  eddsa,
+  ec,
   verifySignature
 }

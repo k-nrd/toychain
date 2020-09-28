@@ -37,7 +37,6 @@ describe('Wallet', () => {
         data, 
         signature: createWallet().sign(data)
       })
-    ).toBe(true)
-
+    ).toBe(false)
   })
 })

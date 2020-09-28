@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require('dotenv').config()
 const { api, blockchain, pubsub } = require('../src/api')
 
 const { DEFAULT_PORT=3000, GENERATE_PEER_PORT } = process.env
