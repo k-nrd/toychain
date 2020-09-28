@@ -29,10 +29,11 @@ jobs:
         # The Node.js version to configure
         with:
           node-version: ${{ matrix.node-version }}
-      - name: yarn install
+      - name: Install dependencies
         # Install and build project
-        run: |
-          make install
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install # will run `yarn install` command
         # Add environment variables
         env:
           CI: true
@@ -40,13 +41,7 @@ jobs:
         # Run Linter
         run: |
           make lint
-      - name: Test & publish code coverage
-        # Publish code coverage on Code Climate
-        # https://github.com/paambaati/codeclimate-action
-        uses: paambaati/codeclimate-action@v2.6.0
-        # Add Code Climate secret key
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - name: Run tests
+        uses: borales/actions-yarn@v2.0.0
         with:
-          coverageCommand: make test-coverage
-          debug: true
+          cmd: test # will run `yarn test` command
