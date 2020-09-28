@@ -29,7 +29,7 @@ jobs:
         # The Node.js version to configure
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, build
+      - name: yarn install
         # Install and build project
         run: |
           make install
