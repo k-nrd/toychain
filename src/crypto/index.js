@@ -14,11 +14,10 @@ const sha256hash = (...args) =>
 
 const ec = new EC('ed25519')
 
-function verifySignature({ pubKey, data, signature }) {
-  return ec
+const verifySignature = ({ pubKey, data, signature }) =>
+  ec
     .keyFromPublic(pubKey, 'hex')
     .verify(sha256hash(data), signature)
-}
 
 module.exports = {
   hex2bin,

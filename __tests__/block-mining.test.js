@@ -1,6 +1,6 @@
 const { describe, test, expect } = require('@jest/globals')
 
-const { mine, adjustDiff } = require('../src/blockchain/mine')
+const { mine, adjustDiff } = require('../src/blockchain')
 const { sha256hash, hex2bin } = require('../src/crypto')
 const { GENESIS, MINE_RATE } = require('../src/config')
 

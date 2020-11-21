@@ -1,5 +1,6 @@
 const { sha256hash, ec } = require('../crypto')
 const { STARTING_BALANCE } = require('../config')
+const { createTransaction, verifyTransaction } = require('./transaction')
 
 function createWallet() {
   const balance = STARTING_BALANCE
@@ -10,7 +11,24 @@ function createWallet() {
     return keyPair.sign(sha256hash(data))
   }
 
-  return Object.freeze({ balance, pubKey, sign })
+  function transact ({ recipient, amount }) {
+    if (amount > balance) {
+      throw 'Yo'
+    }
+
+    return createTransaction({ sender: { balance, pubKey, sign }, recipient, amount })
+  }
+
+  return Object.freeze({
+    balance,
+    pubKey,
+    sign,
+    createTransaction: transact
+  })
 }
 
-module.exports = createWallet
+module.exports = {
+  createWallet,
+  createTransaction,
+  verifyTransaction
+}

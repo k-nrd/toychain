@@ -37,4 +37,4 @@ function createPubSub ({ blockchain }) {
   return Object.freeze({ publish, broadcast })
 }
 
-module.exports = createPubSub
+module.exports = { createPubSub }

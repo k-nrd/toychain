@@ -1,7 +1,6 @@
 const { beforeEach, describe, test, expect } = require('@jest/globals')
 
-const createBlockchain = require('../src/blockchain')
-const validate = require('../src/blockchain/validate')
+const { createBlockchain, validate } = require('../src/blockchain')
 
 describe('Validation', () => {
   let own,

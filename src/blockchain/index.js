@@ -1,5 +1,5 @@
 const request = require('request')
-const { mine } = require('./mine')
+const { mine, adjustDiff } = require('./mine')
 const validate = require('./validate')
 const { GENESIS, ROOT_NODE_ADDR } = require('../config')
 
@@ -43,4 +43,9 @@ function createBlockchain() {
   })
 }
 
-module.exports = createBlockchain
+module.exports = {
+  createBlockchain,
+  mine, 
+  adjustDiff,
+  validate
+}

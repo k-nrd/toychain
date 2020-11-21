@@ -1,13 +1,16 @@
 const { beforeEach, describe, test, expect } = require('@jest/globals')
 
-const createWallet = require('../src/wallet')
+const { createWallet } = require('../src/wallet')
 const { verifySignature } = require('../src/crypto')
 
 describe('Wallet', () => {
-  let wallet
+  let wallet, amount, recipient, transaction
 
   beforeEach(() => {
     wallet = createWallet()
+    amount = 50
+    recipient = 'foo'
+    transaction = wallet.createTransaction({ recipient, amount })
   })
 
   test('Wallet has a balance', () => {
@@ -38,5 +41,21 @@ describe('Wallet', () => {
         signature: createWallet().sign(data)
       })
     ).toBe(false)
+  })
+
+  test('Wallet can create transaction, throws if amount exceeds balance', () => {
+    expect(() => wallet.createTransaction({ recipient, amount: 999999 })).toThrow()
+  })
+
+  test('Wallet can create transaction if amount is valid', () => {
+    expect(() => wallet.createTransaction({ recipient, amount })).not.toThrow()
+  })
+
+  test('Wallet can create transaction, input matches with wallet', () => {
+    expect(transaction.input.address).toEqual(wallet.pubKey)
+  })
+
+  test('Wallet can create transaction, outputs amount to recipient', () => {
+    expect(transaction.output[recipient]).toEqual(amount)
   })
 })

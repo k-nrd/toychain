@@ -1,6 +1,6 @@
 const { beforeEach, describe, test, expect } = require('@jest/globals')
 
-const createBlockchain = require('../src/blockchain')
+const { createBlockchain } = require('../src/blockchain')
 const { MINE_RATE } = require('../src/config')
 
 describe('Mining rate', () => {
@@ -14,7 +14,7 @@ describe('Mining rate', () => {
   test('Average mining rate is MINE_RATE', () => {
     const deltas = []
     own.add({ data: 1 })
-    for (let i = 2; i < 52; i++) {
+    for (let i = 2; i < 102; i++) {
       own.add({ data: i })
       snapshot = own.get()
       deltas.push(snapshot[i].timestamp - snapshot[i-1].timestamp)

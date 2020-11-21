@@ -36,7 +36,8 @@
     "elliptic": "^6.5.3",
     "polka": "^0.5.2",
     "redis": "^3.0.2",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@jest/globals": "^26.4.2",

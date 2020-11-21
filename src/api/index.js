@@ -1,8 +1,8 @@
 const polka = require('polka')
 const { json } = require('body-parser')
 
-const createBlockchain = require('../blockchain')
-const createPubSub = require('../pubsub')
+const { createBlockchain } = require('../blockchain')
+const { createPubSub } = require('../pubsub')
 const { getBlocks, mineBlock } = require('./routes')
 
 const blockchain = createBlockchain()

@@ -1,6 +1,6 @@
 const { beforeEach, describe, test, expect } = require('@jest/globals')
 
-const createBlockchain = require('../src/blockchain')
+const { createBlockchain } = require('../src/blockchain')
 
 describe('Replacement', () => {
   let own,
